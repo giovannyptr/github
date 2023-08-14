@@ -2,7 +2,7 @@ import {
     FETCH_START,
     FETCH_SUCCESS,
     FETCH_FAILURE,
-  } from '../actions/githubActions';
+  } from '../actions/actionTypes';
   
   const initialState = {
     data: [],

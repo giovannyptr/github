@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchGitHubData } from '../actions/githubActions';
+import { fetchGitHubData } from '../actions/githubAction';
 
 const GitHubSearch = () => {
   const [query, setQuery] = useState('');
