@@ -15,7 +15,8 @@ function App() {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <div className="App">
-          <h1>GitHub Search App</h1>
+          <h1>GitHub Searcher</h1>
+          <p>Search User or Repositories below</p>
           <GitHubSearch 
             currentPage={currentPage} 
             onPageChange={handlePageChange}
