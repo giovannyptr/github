@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { fetchGitHubData } from '../actions/githubAction';
+import GitHubResults from './GitHubResults';
 
-const GitHubSearch = () => {
+const GitHubSearch = ({ currentPage, onPageChange }) => {
   const [query, setQuery] = useState('');
   const dispatch = useDispatch();
-  
-  const data = useSelector(state => state.github.data);
-  const isLoading = useSelector(state => state.github.isLoading);
-  const error = useSelector(state => state.github.error);
 
-  const handleSearch = () => {
-    dispatch(fetchGitHubData(query, 'repositories', 1)); // For example, searching repositories
+  const handleSearch = (page = 1) => {
+    dispatch(fetchGitHubData(query, 'repositories', page));
   };
 
   return (
@@ -21,15 +18,12 @@ const GitHubSearch = () => {
         onChange={e => setQuery(e.target.value)} 
         placeholder="Search GitHub"
       />
-      <button onClick={handleSearch}>Search</button>
-
-      {isLoading && <p>Loading...</p>}
-      {error && <p>Error: {error}</p>}
-      <ul>
-        {data.items && data.items.map(item => (
-          <li key={item.id}>{item.name || item.login}</li>
-        ))}
-      </ul>
+      <button onClick={() => handleSearch(currentPage)}>Search</button>
+      <GitHubResults 
+        currentPage={currentPage}
+        onNewPageRequest={handleSearch}
+        onPageChange={onPageChange} 
+      />
     </div>
   );
 };
